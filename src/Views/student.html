@@ -8,19 +8,31 @@
 </head>
 <body>
 
+<div class="section">
 <div class="container">
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="{{base_url()}}">
+      <img src="{{base_url()}}/index.PNG" width="30" height="30" class="d-inline-block align-top" alt="">
+      Student Grades
+    </a>
+  </nav>
+ </div>
+</div>
+<div class="section">
+<div class="container">
+<br>
  <div class="media">
-      <img class="align-self-start mr-3" src="user-icon.png" alt="Generic placeholder image">
+      <img src="{{base_url()}}/user-icon.png" class="align-self-start mr-3" src="user-icon.png" alt="Generic placeholder image">
       <div class="media-body">
         <h5 class="mt-0">{{student.FirstName}} {{student.LastName}}</h5>
         <p>{{student.Major}}</p>
       </div>
   </div>
-  <div class="row">
+  <br>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
       Add Grades
     </button>
-  </div>
+    <br><br>
   <table class="table">
   <thead>
     <tr>
@@ -69,6 +81,8 @@
         </form>      
     </div>
   </div>
+</div>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

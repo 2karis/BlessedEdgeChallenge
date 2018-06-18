@@ -1,6 +1,6 @@
 <?php 
 namespace GradeController;
-
+use src\Models\grade;
 class GradeController{
 
 	protected $container;
@@ -42,19 +42,18 @@ class GradeController{
 	}
 
 	public function postEditGrade($request, $response, $args) {
-		$id = $args['student_id'];
+		$id = $args['grade_id'];
 
 		$course = $request->getParam('course');
 		$grade = $request->getParam('grade');
 		$student_id = $request->getParam('student_id');
 
-	    $this->db
-	    ->table('grade')
-	    ->where('id', $id)
+		grade::where('id', $id)
 	    ->update([
 	    	'course'=>$course,
 	    	'grade'=>$grade,
 	    ]);
-	    return $response->withRedirect($this->router->pathFor('student.view', ['student_id' => $student_id]));
+		
+		return $response->withRedirect($this->router->pathFor('student.view', ['student_id' => $student_id]));
 	}
 }

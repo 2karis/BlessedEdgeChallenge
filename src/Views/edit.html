@@ -8,7 +8,20 @@
 </head>
 <body>
 
+  <div class="section">
 <div class="container">
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="{{base_url()}}">
+      <img src="{{base_url()}}/index.PNG" width="30" height="30" class="d-inline-block align-top" alt="">
+      Student Grades
+    </a>
+  </nav>
+</div>
+</div>
+<div class="section">
+<div class="container">
+  <h2>Edit grades</h2>
+ 
 <form action="{{base_url()}}/grade/{{grade.id}}/post-grade" method="post">
       <div class="form-group col-md-12">
         <label for="exampleInputEmail1">Course</label>
@@ -21,6 +34,8 @@
   <input type="hidden" class="form-control" name="student_id" value="{{grade.student_id}}">
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

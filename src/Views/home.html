@@ -7,13 +7,24 @@
 
 </head>
 <body>
+
+
+<div class="section">
+<div class="container">
+	<nav class="navbar navbar-light bg-light">
+	  <a class="navbar-brand" href="{{base_url()}}">
+	    <img src="{{base_url()}}/index.PNG" width="30" height="30" class="d-inline-block align-top" alt="">
+	    Student Grades
+	  </a>
+	</nav>
+	 </div>
+</div>
+<div class="section">
 <div class="container">
 	<h1>All Students</h1>
-	<div class="row">
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
 			Add Student
 		</button>
-	</div>
 	{% for student in students %}
 	<hr>
 	<div class="media">
@@ -61,6 +72,7 @@
       	</form>      
     </div>
   </div>
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
