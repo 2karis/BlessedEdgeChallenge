@@ -1,0 +1,71 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title>Hello World</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container">
+	<h1>All Students</h1>
+	<div class="row">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+			Add Student
+		</button>
+	</div>
+	{% for student in students %}
+	<hr>
+	<div class="media">
+		<a href="{{base_url()}}/student/{{student.id}}">
+			<img class="align-self-start mr-3" src="user-icon.png" alt="Generic placeholder image">
+		</a>
+	  	<div class="media-body">
+		    <h5 class="mt-0">{{student.FirstName}} {{student.LastName}}</h5>
+		    <p>{{student.Major}}</p>
+	  	</div>
+	</div>
+	{% endfor %}
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    	<form action="{{base_url()}}/new-student" method="post">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">New Student</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		  <div class="form-group col-md-12">
+		    <label for="exampleInputEmail1">First Name</label>
+		    <input type="text" class="form-control"  name="f_name">
+		  </div>
+		  <div class="form-group col-md-12">
+		    <label for="exampleInputEmail1">Last Name</label>
+		    <input type="text" class="form-control" name="l_name">
+		  </div>
+		  <div class="form-group col-md-12">
+		    <label for="exampleInputEmail1">Major</label>
+		    <input type="text" class="form-control" name="major">
+		  </div>
+		  
+		</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		<button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      	</form>      
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+</body>
+</html> 
