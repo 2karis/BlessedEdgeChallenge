@@ -1,5 +1,9 @@
 <?php
+
 require '../vendor/autoload.php';
+include  '../src/controllers/HomeController.php';
+include  '../src/controllers/GradeController.php';
+include  '../src/controllers/StudentController.php';
 
 
 $config['displayErrorDetails'] = true;
@@ -35,102 +39,27 @@ $container['db'] = function ($container) {
     return $capsule;
 };
 
+$container['HomeController'] = function($container) {
+    return new HomeController\HomeController($container);
+};
+$container['GradeController'] = function($container) {
+    return new GradeController\GradeController($container);
+};
+$container['StudentController'] = function($container) {
+    return new StudentController\StudentController($container);
+};
 
-//student
+$app->get('/student/{student_id}', \StudentController::class . ':viewStudent')->setname('student.view');
 
-$app->get('/student/{student_id}', function ($request, $response, $args) {
-    $id = $args['student_id'];
-    $student = $this->db
-    ->table('student')
-    ->where('student.id', $id)
-    ->first();
-    $grades = $this->db
-    ->table('grade')
-    ->where('grade.student_id', $id)
-    ->get();
-    $data = [
-		'student'=>$student,
-		'grades'=>$grades
-	];
-    return $this->view->render($response, 'student.html', $data);
-    
-})->setname('student.view');
+$app->post('/new-student', \StudentController::class . ':newStudent' );
 
+$app->post('/student/{student_id}/new-grade', \GradeController::class . ':newGrade' );
 
-$app->post('/new-student', function ($request, $response, $args) {
-	$f_name = $request->getParam('f_name');
-	$l_name = $request->getParam('l_name');
-	$major = $request->getParam('major');
+$app->get('/grade/{grade_id}/edit-grade', \GradeController::class . ':getEditGrade')->setname('grade.get');
 
-    $students = $this->db
-    ->table('student')
-    ->insert([
-    	'FirstName'=>$f_name,
-    	'LastName'=>$l_name,
-    	'Major'=>$major
-    ]);
-    return $response->withRedirect($this->router->pathFor('home'));
-});
+$app->post('/grade/{grade_id}/post-grade', \GradeController::class . ':postEditGrade')->setname('grade.post');
 
-//grade
-
-$app->post('/student/{student_id}/new-grade', function ($request, $response, $args) {
-	$id = $args['student_id'];
-
-	$course = $request->getParam('course');
-	$grade = $request->getParam('grade');
-
-    $students = $this->db
-    ->table('grade')
-    ->insert([
-    	'student_id'=>$id,
-    	'course'=>$course,
-    	'grade'=>$grade,
-    ]);
-    return $response->withRedirect($this->router->pathFor('student.view', ['student_id' => $id]));
-});
-
-
-//edit grade
-
-$app->get('/grade/{grade_id}/edit-grade', function ($request, $response, $args) {
-	$id = $args['grade_id'];
-
-	$grade = $this->db->table('grade')->where('id',$id)->first();
-	$data =[
-		'grade'=>$grade
-	];
-    return $this->view->render($response, 'edit.html', $data);
-})->setname('grade.get');
-
-
-$app->post('/grade/{grade_id}/post-grade', function ($request, $response, $args) {
-	$id = $args['student_id'];
-
-	$course = $request->getParam('course');
-	$grade = $request->getParam('grade');
-	$student_id = $request->getParam('student_id');
-
-    $this->db
-    ->table('grade')
-    ->where('id', $id)
-    ->update([
-    	'course'=>$course,
-    	'grade'=>$grade,
-    ]);
-    return $response->withRedirect($this->router->pathFor('student.view', ['student_id' => $student_id]));
-})->setname('grade.post');
-
-
-//home page
-
-$app->get('/', function ($request, $response, $args) {
-	$students = $this->db->table('student')->get();
-	$data =[
-		'students'=>$students
-	];
-    return $this->view->render($response, 'home.html', $data);
-})->setname('home');
+$app->get('/', \HomeController::class . ':home')->setname('home');
 
 $app->run();
 
