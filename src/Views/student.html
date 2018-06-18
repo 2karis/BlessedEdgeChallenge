@@ -40,6 +40,7 @@
       <th scope="col">course</th>
       <th scope="col">grade</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -49,6 +50,7 @@
       <td>{{grade.course}}</td>
       <td>{{grade.grade}}</td>
       <td><a href="{{base_url()}}/grade/{{grade.id}}/edit-grade">edit</a></td>
+      <td><a href="{{base_url()}}/student/{{grade.student_id}}/grade/{{grade.id}}/delete-grade"  >delete</a></td>
     </tr>
     {% endfor %}
   </tbody>

@@ -56,4 +56,14 @@ class GradeController{
 		
 		return $response->withRedirect($this->router->pathFor('student.view', ['student_id' => $student_id]));
 	}
+
+	public function postDeleteGrade($request, $response, $args) {
+		$student_id = $args['student_id'];
+		$id = $args['grade_id'];
+
+		grade::where('id', $id)
+	    ->delete();
+		
+		return $response->withRedirect($this->router->pathFor('student.view', ['student_id' => $student_id]));
+	}
 }

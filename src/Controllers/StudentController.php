@@ -35,17 +35,27 @@ class StudentController{
     }
 
     public function newStudent($request, $response, $args) {
-    	$f_name = $request->getParam('f_name');
-    	$l_name = $request->getParam('l_name');
-    	$major = $request->getParam('major');
+        $f_name = $request->getParam('f_name');
+        $l_name = $request->getParam('l_name');
+        $major = $request->getParam('major');
 
         $students = $this->db
         ->table('student')
         ->insert([
-        	'FirstName'=>$f_name,
-        	'LastName'=>$l_name,
-        	'Major'=>$major
+            'FirstName'=>$f_name,
+            'LastName'=>$l_name,
+            'Major'=>$major
         ]);
+        return $response->withRedirect($this->router->pathFor('home'));
+    }
+    public function deleteStudent($request, $response, $args) {
+         $id = $args['student_id'];
+
+        $this->db
+        ->table('student')
+        ->where('id', $id)
+        ->delete();
+
         return $response->withRedirect($this->router->pathFor('home'));
     }
 

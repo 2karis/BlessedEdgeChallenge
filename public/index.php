@@ -51,13 +51,17 @@ $container['StudentController'] = function($container) {
 
 $app->get('/student/{student_id}', \StudentController::class . ':viewStudent')->setname('student.view');
 
+$app->get('/student/{student_id}/delete', \StudentController::class . ':deleteStudent')->setname('student.delete');
+
 $app->post('/new-student', \StudentController::class . ':newStudent' );
 
-$app->post('/student/{student_id}/new-grade', \GradeController::class . ':newGrade' );
+$app->post('/student/{student_id}/new-grade', \GradeController::class . ':newGrade' )->setname('grade.new');
 
 $app->get('/grade/{grade_id}/edit-grade', \GradeController::class . ':getEditGrade')->setname('grade.get');
 
 $app->post('/grade/{grade_id}/post-grade', \GradeController::class . ':postEditGrade')->setname('grade.post');
+
+$app->get('/student/{student_id}/grade/{grade_id}/delete-grade', \GradeController::class . ':postDeleteGrade')->setname('grade.delete');
 
 $app->get('/', \HomeController::class . ':home')->setname('home');
 

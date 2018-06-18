@@ -35,6 +35,7 @@
 		    <h5 class="mt-0">{{student.FirstName}} {{student.LastName}}</h5>
 		    <p>{{student.Major}}</p>
 	  	</div>
+	  	<a href="{{base_url()}}/student/{{student.id}}/delete"> remove </a>
 	</div>
 	{% endfor %}
 <!-- Button trigger modal -->
